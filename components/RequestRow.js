@@ -57,7 +57,7 @@ class RequestRow extends Component {
                 <Table.Cell>{id}</Table.Cell>
                 <Table.Cell>{request_details.description}</Table.Cell>
                 <Table.Cell>{web3.utils.fromWei(request.value)}</Table.Cell>
-                <Table.Cell>{request.provider}</Table.Cell>
+                <Table.Cell>{request.freelancer}</Table.Cell>
                 <Table.Cell>{request.approvalCount}/{approversCount}</Table.Cell>
                 <Table.Cell>
                     {request.complete ? null : (

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Layout from '../../components/Layout';
-import { Button, Form, Input, Message, TextArea } from 'semantic-ui-react'
+import { Button, Form, Input, Message, TextArea, Container, Segment } from 'semantic-ui-react'
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 import { Router } from '../../routes';
@@ -85,56 +85,60 @@ class FreelancerNew extends Component {
     render() {
         return (
             <Layout>
-                <h3>Create Freelancer</h3>
+                <Container>
+                    <Segment className='borderless'>
+                        <h3>Create Freelancer</h3>
 
-                <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
-                    <Form.Field>
-                        <label>Name</label>
-                        <Input
-                          value={this.state.name}
-                          onChange={event => this.setState({ name: event.target.value })}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Location</label>
-                        <Input
-                          value={this.state.location}
-                          onChange={event => this.setState({ location: event.target.value })}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Title</label>
-                        <Input
-                          value={this.state.title}
-                          onChange={event => this.setState({ title: event.target.value })}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Summary</label>
-                        <TextArea
-                          value={this.state.summary}
-                          onChange={event => this.setState({ summary: event.target.value })}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Hourly Rate</label>
-                        <Input
-                          value={this.state.rate}
-                          onChange={event => this.setState({ rate: event.target.value })}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Image</label>
-                        <input
-                            type = "file"
-                            onChange = {this.captureFile}
-                        />
-                    </Form.Field>
-                    <Message error header="Oops!" content={this.state.errorMessage} />
-                    <Button primary loading={this.state.loading}>
-                        Create
-                    </Button>
-                </Form>
+                        <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
+                            <Form.Field>
+                                <label>Name</label>
+                                <Input
+                                  value={this.state.name}
+                                  onChange={event => this.setState({ name: event.target.value })}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Location</label>
+                                <Input
+                                  value={this.state.location}
+                                  onChange={event => this.setState({ location: event.target.value })}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Title</label>
+                                <Input
+                                  value={this.state.title}
+                                  onChange={event => this.setState({ title: event.target.value })}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Summary</label>
+                                <TextArea
+                                  value={this.state.summary}
+                                  onChange={event => this.setState({ summary: event.target.value })}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Hourly Rate</label>
+                                <Input
+                                  value={this.state.rate}
+                                  onChange={event => this.setState({ rate: event.target.value })}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Image</label>
+                                <input
+                                    type = "file"
+                                    onChange = {this.captureFile}
+                                />
+                            </Form.Field>
+                            <Message error header="Oops!" content={this.state.errorMessage} />
+                            <Button primary loading={this.state.loading}>
+                                Create
+                            </Button>
+                        </Form>
+                    </Segment>
+                </Container>
             </Layout>
         );
     }

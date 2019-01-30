@@ -103,7 +103,7 @@ class CampaignShow extends Component {
                             <HeaderCell>ID</HeaderCell>
                             <HeaderCell>Description</HeaderCell>
                             <HeaderCell>Amount</HeaderCell>
-                            <HeaderCell>Recipient</HeaderCell>
+                            <HeaderCell>Freelancer</HeaderCell>
                             <HeaderCell>Approval Count</HeaderCell>
                             <HeaderCell>Approve</HeaderCell>
                             <HeaderCell>Finalize</HeaderCell>

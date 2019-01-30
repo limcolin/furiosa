@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Message, Input, Dropdown } from 'semantic-ui-react';
+import { Form, Button, Message, Input, Dropdown, Container, Segment } from 'semantic-ui-react';
 import Campaign from '../../../ethereum/campaign';
 import web3 from '../../../ethereum/web3';
 import { Link, Router } from '../../../routes';
@@ -37,19 +37,19 @@ class RequestNew extends Component {
 
     renderFreelancers() {
         const items = this.props.freelancers.map((address, index) => {
-                return <Dropdown.Item
-                  key={index}
-                  text={this.props.freelancerDetails[index]['name']}
-                  value={address}
-                  onClick={(event, data) => this.setState({freelancer: data.value})}
-                />
+            return {
+                key: index,
+                text: this.props.freelancerDetails[index]['name'],
+                value: address
+            }
         });
 
         return <Dropdown
-            placeholder='Select Service Freelancer'
+            placeholder='Select Freelancer'
             fluid
             selection
             options={items}
+            onChange={(event, data) => this.setState({ freelancer: data.value })}
         />
     }
 
@@ -75,6 +75,7 @@ class RequestNew extends Component {
         const campaign = Campaign(this.props.address);
 
         const { description, amount, freelancer } = this.state;
+
         this.setState({ loading: true, errorMessage: '' });
 
         try {
@@ -98,37 +99,37 @@ class RequestNew extends Component {
     render() {
         return (
             <Layout>
-                <Link route={`/campaigns/${this.props.address}`}>
-                    <a>Back</a>
-                </Link>
-                <h3>Create a Request</h3>
-                <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
-                    <Form.Field>
-                        <label>Description</label>
-                        <Input
-                            value={this.state.description}
-                            onChange={event => this.setState({ description: event.target.value })}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Value in Ether</label>
-                        <Input
-                            value={this.state.amount}
-                            onChange={event => this.setState({ amount: event.target.value })}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Freelancer</label>
-                        <Input
-                            value={this.state.recipient}
-                            onChange={event => this.setState({ freelancer: event.target.value })}
-                        />
-                        {this.renderFreelancers()}
-                    </Form.Field>
+                <Container>
+                    <Segment className='borderless'>
+                        <Link route={`/campaigns/${this.props.address}`}>
+                            <a>Back</a>
+                        </Link>
+                        <h3>Create a Request</h3>
+                        <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
+                            <Form.Field>
+                                <label>Description</label>
+                                <Input
+                                    value={this.state.description}
+                                    onChange={event => this.setState({ description: event.target.value })}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Value in Ether</label>
+                                <Input
+                                    value={this.state.amount}
+                                    onChange={event => this.setState({ amount: event.target.value })}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Freelancer</label>
+                                {this.renderFreelancers()}
+                            </Form.Field>
 
-                    <Message error header="Oops!" content={this.state.errorMessage} />
-                    <Button primary loading={this.state.loading}>Create</Button>
-                </Form>
+                            <Message error header="Oops!" content={this.state.errorMessage} />
+                            <Button primary loading={this.state.loading}>Create</Button>
+                        </Form>
+                    </Segment>
+                </Container>
             </Layout>
         );
     }

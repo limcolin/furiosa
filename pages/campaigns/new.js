@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Layout from '../../components/Layout';
-import { Button, Form, Input, Message, TextArea } from 'semantic-ui-react'
+import { Button, Form, Input, Message, TextArea, Container, Segment } from 'semantic-ui-react'
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 import { Router } from '../../routes';
@@ -129,53 +129,57 @@ class CampaignNew extends Component {
     render() {
         return (
             <Layout>
-                <h3>Create Campaign</h3>
+                <Container>
+                    <Segment className='borderless'>
+                        <h3>Create Campaign</h3>
 
-                <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
-                    <Form.Field>
-                        <label>Campaign Name</label>
-                        <Input
-                          value={this.state.name}
-                          onChange={event => this.setState({ name: event.target.value })}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Description</label>
-                        <TextArea
-                          value={this.state.description}
-                          onChange={event => this.setState({ description: event.target.value })}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Minimum Contribution</label>
-                        <Input
-                            value={this.state.minimumContribution}
-                            onChange={event => this.setState({ minimumContribution: event.target.value })}
-                            label="wei"
-                            labelPosition="right" />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Campaign Target</label>
-                        <Input
-                            value={this.state.target}
-                            onChange={event => this.setState({ target: event.target.value })}
-                            label="eth"
-                            labelPosition="right" />
-                    </Form.Field>
+                        <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
+                            <Form.Field>
+                                <label>Campaign Name</label>
+                                <Input
+                                  value={this.state.name}
+                                  onChange={event => this.setState({ name: event.target.value })}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Description</label>
+                                <TextArea
+                                  value={this.state.description}
+                                  onChange={event => this.setState({ description: event.target.value })}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Minimum Contribution</label>
+                                <Input
+                                    value={this.state.minimumContribution}
+                                    onChange={event => this.setState({ minimumContribution: event.target.value })}
+                                    label="wei"
+                                    labelPosition="right" />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Campaign Target</label>
+                                <Input
+                                    value={this.state.target}
+                                    onChange={event => this.setState({ target: event.target.value })}
+                                    label="eth"
+                                    labelPosition="right" />
+                            </Form.Field>
 
-                    <Form.Field>
-                        <label>Cover Image</label>
-                        <input
-                            type = "file"
-                            onChange = {this.captureFile}
-                        />
-                    </Form.Field>
+                            <Form.Field>
+                                <label>Cover Image</label>
+                                <input
+                                    type = "file"
+                                    onChange = {this.captureFile}
+                                />
+                            </Form.Field>
 
-                    <Message error header="Oops!" content={this.state.errorMessage} />
-                    <Button primary loading={this.state.loading}>
-                        Create
-                    </Button>
-                </Form>
+                            <Message error header="Oops!" content={this.state.errorMessage} />
+                            <Button primary loading={this.state.loading}>
+                                Create
+                            </Button>
+                        </Form>
+                    </Segment>
+                </Container>
             </Layout>
         );
     }

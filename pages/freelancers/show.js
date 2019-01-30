@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Layout from '../../components/Layout';
 import Freelancer from '../../ethereum/freelancer';
-import { Card, Grid, Button, Container, Segment, Tab, Image, Icon, Label } from 'semantic-ui-react';
+import { Card, Grid, Button, Container, Segment, Tab, Image, Icon, Label, Table } from 'semantic-ui-react';
 import web3 from '../../ethereum/web3';
 import { Link } from '../../routes';
 import "../../style.css";
+import RequestRow from '../../components/RequestRow';
+import * as superagent from 'superagent';
 
 class FreelancerShow extends Component {
     static async getInitialProps(props) {
@@ -44,6 +46,7 @@ class FreelancerShow extends Component {
             { menuItem: 'Summary', render: () => <Tab.Pane className='pane' attached={false}>{this.renderSummary()}</Tab.Pane> },
             { menuItem: 'Work History & Feedback', render: () => <Tab.Pane className='pane' attached={false}>{this.renderHistory()}</Tab.Pane> },
             { menuItem: 'Portfolio', render: () => <Tab.Pane className='pane' attached={false}>{this.renderPortfolio()}</Tab.Pane> },
+            { menuItem: 'Pending Requests', render: () => <Tab.Pane className='pane' attached={false}>{this.renderRequests()}</Tab.Pane> },
         ]
 
         return (
@@ -60,24 +63,29 @@ class FreelancerShow extends Component {
 
         const items = [
             {
+                key: 0,
                 header: freelancer_details.rate,
                 meta: 'Hourly Rate (USD)'
             },
             {
+                key: 1,
                 header: freelancer_details.rate,
                 meta: 'Total Earned (USD)'
             },
             {
+                key: 2,
                 header: freelancer_details.rate,
                 meta: 'Jobs Completed'
             },
             {
+                key: 3,
                 header: manager,
                 meta: 'Address of Manager',
                 description: 'The manager created this campaign and can create requests to withdraw money',
                 style: { overflowWrap: 'break-word' }
             },
             {
+                key: 4,
                 header: web3.utils.fromWei(balance, 'ether'),
                 meta: 'Freelancer Balance (ether)',
                 description: 'The balance is how much money this freelancer has left to spend.'
@@ -132,6 +140,7 @@ class FreelancerShow extends Component {
     }
     renderHistory() {}
     renderPortfolio() {}
+    renderRequests() {}
 
     render() {
         return (
