@@ -97,7 +97,7 @@ class FreelancerShow extends Component {
                         </Segment>
                         <Segment className='borderless'>
                             <h4>Skills</h4>
-                            <Label.Group color='blue'>
+                            <Label.Group>
                                 <Label as='a'>Javascript</Label>
                                 <Label as='a'>PHP</Label>
                                 <Label as='a'>HTML</Label>
