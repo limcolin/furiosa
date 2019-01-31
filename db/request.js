@@ -16,5 +16,10 @@ module.exports = new Archetype({
     freelancer: {
         $type: 'string',
         $required: true
+    },
+    approved: {
+        $type: 'boolean',
+        $required: true,
+        $default: false
     }
 }).compile('RequestType');
