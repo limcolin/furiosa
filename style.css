@@ -1,5 +1,6 @@
 body {
     font-family: 'Cutive Mono', monospace;
+    background: #fff url(/static/bgmesh.png) repeat center center;
 }
 h3 {
     font-family: 'Limelight', cursive;
