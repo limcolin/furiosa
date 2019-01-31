@@ -66,7 +66,7 @@ contract Campaign {
     struct Request {
         uint value;
         address payable freelancer;
-        bool complete;
+        uint status;
         mapping(address => bool) approvals;
         uint approvalCount;
     }
@@ -98,7 +98,7 @@ contract Campaign {
         Request memory newRequest = Request({
             value: value,
             freelancer: freelancer,
-            complete: false,
+            status: 0,
             approvalCount: 0
             });
 
@@ -113,16 +113,31 @@ contract Campaign {
 
         request.approvals[msg.sender] = true;
         request.approvalCount++;
+
+        if(request.approvalCount > (approversCount / 2)) {
+            emit SendRequest();
+        }
+    }
+
+    event SendRequest();
+
+    function commenceRequest(uint index) public restricted {
+        Request storage request = requests[index];
+
+        require(request.status == 0);
+        require(request.approvalCount > (approversCount / 2));
+
+        request.freelancer.transfer(request.value / 2);
+        request.status = 1;
     }
 
     function finalizeRequest(uint index) public restricted {
         Request storage request = requests[index];
 
-        require(!request.complete);
-        require(request.approvalCount > (approversCount / 2));
+        require(request.status == 1);
 
-        request.freelancer.transfer(request.value);
-        request.complete = true;
+        request.freelancer.transfer(request.value / 2);
+        request.status = 2;
     }
 
     function getSummary() public view returns (
