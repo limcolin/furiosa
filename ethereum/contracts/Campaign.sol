@@ -1,11 +1,11 @@
-pragma solidity ^0.5.2;
+pragma solidity ^0.5.3;
 
 contract CampaignFactory {
     address[] public deployedCampaigns;
 
     address[] public freelancers;
 
-    function createCampaign(uint minimum) public returns(address) {
+    function createCampaign(uint minimum) public {
         Campaign newCampaign = new Campaign(minimum, msg.sender);
 
         deployedCampaigns.push(address(newCampaign));
@@ -55,7 +55,11 @@ contract Freelancer {
         );
     }
 
-    function () external payable {}
+    function () external payable {
+        emit PaidFreelancer(msg.value);
+    }
+
+    event PaidFreelancer(uint amount);
 }
 
 contract Campaign {
