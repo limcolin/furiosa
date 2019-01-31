@@ -74,9 +74,9 @@ class Header extends Component {
                 $(el).html(message);
 
                 if(do_cycles === true){
-                    setTimeout(m.animateFadeBuffer, 50);
+                    setTimeout(m.animateFadeBuffer, 80);
                 } else {
-                    setTimeout(m.cycleText, 2000);
+                    setTimeout(m.cycleText, 3000);
                 }
             };
 
@@ -88,7 +88,7 @@ class Header extends Component {
 
                 m.current_length = 0;
                 m.fadeBuffer = false;
-                //$(el).html('Codename:Furiosa');
+                //$(el).html('_');
 
                 setTimeout(m.animateIn, 200);
             };
@@ -105,18 +105,18 @@ class Header extends Component {
             <Menu className='main-menu' pointing secondary>
                 <Menu.Menu>
                     <Menu.Item>
-                        <Link route="/">
+                        <Link href="/" route="/">
                             <a className="item">Campaigns</a>
                         </Link>
                     </Menu.Item>
                     <Menu.Item>
-                        <Link route={`/freelancers`}>
+                        <Link href={`/freelancers`} route={`/freelancers`}>
                             <a className="item">Freelancers</a>
                         </Link>
                     </Menu.Item>
                 </Menu.Menu>
                 <Menu.Header>
-                    <h3 id='messenger'>CODENAME:FURIOSA</h3>
+                    <h3 id='messenger'>_</h3>
                 </Menu.Header>
             </Menu>
         );
