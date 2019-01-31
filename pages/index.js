@@ -152,8 +152,10 @@ class CampaignIndex extends Component {
                 <div>
                     <div className='intro-section'>
                         <Container>
-                            <div className='cards-div'>
-                                <h3>Crowdfunding Done Right</h3>
+                            <div className='cards-div rw-wrapper'>
+                                <h3 className='rw-sentence'>
+                                    Crowdfunding Done Right
+                                </h3>
                                 <p>Have you ever donated to a Kickstarter project only to have its creators just run away with the money?</p>
                                 <p>Well, here at Furiosa, we help crowdfund innovative ideas by ensuring that your contributions only go to reputable freelancers completing jobs to execute them.</p>
                                 <p>When you donate to a campaign, you get voting rights to every spend request being made. Only when a request is approved, do funds get dispersed to the freelancer linked to it.</p>

@@ -31,7 +31,7 @@ export default () => {
                                     Furiosa
                                 </Header>
                                 <p id="message-from-us">
-                                    We would like to shout out a massive thanks to everyone for the amazing support we've received. Absolutely none of this would have been possible without you <Icon name='heart' />
+                                    We'd like to give a massive shout out to everyone for the amazing support we've received. Absolutely none of this would have been possible without you <Icon name='heart' />
                                 </p>
                                 <p>© 2019 FURIOSA</p>
                             </Grid.Column>

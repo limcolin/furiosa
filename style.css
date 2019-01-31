@@ -3,7 +3,13 @@ body {
     background: #fff url(/static/bgmesh.png) repeat center center;
 }
 h3 {
-    font-family: 'Limelight', cursive;
+    font-family: 'Cutive Mono', monospace;
+}
+h3#logo {
+    font-family: 'Cutive Mono', monospace!important;
+}
+.divider-section h3 {
+    font-family: 'Poiret One', cursive;
 }
 span.date {
     font-family: 'Poiret One', cursive;
@@ -62,6 +68,7 @@ span.rate {
 .intro-section p {
     font-size: 2.3rem;
     color: black;
+    letter-spacing: -4px;
 }
 .divider-section {
     background-color: #262b2d;
