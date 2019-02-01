@@ -11,6 +11,7 @@ import "../../style.css";
 import RequestRow from '../../components/RequestRow';
 import ContributionRow from '../../components/ContributionRow';
 import moment from 'moment';
+import Board from 'react-trello'
 
 class CampaignShow extends Component {
     state = {
@@ -79,6 +80,7 @@ class CampaignShow extends Component {
     renderTabs() {
         const panes = [
             { menuItem: 'Info', render: () => <Tab.Pane className='pane' attached={false}>{this.renderInfo()}</Tab.Pane> },
+            { menuItem: 'Roadmap', render: () => <Tab.Pane className='pane' attached={false}>{this.renderRoadmap()}</Tab.Pane> },
             { menuItem: 'Requests', render: () => <Tab.Pane className='pane' attached={false}>{this.renderRequests()}</Tab.Pane> },
             { menuItem: 'Contributions', render: () => <Tab.Pane className='pane' attached={false}>{this.renderContributions()}</Tab.Pane> },
         ]
@@ -106,6 +108,7 @@ class CampaignShow extends Component {
                             <HeaderCell>Freelancer</HeaderCell>
                             <HeaderCell>Approval Count</HeaderCell>
                             <HeaderCell>Approve</HeaderCell>
+                            <HeaderCell>Commence</HeaderCell>
                             <HeaderCell>Finalize</HeaderCell>
                         </Row>
                     </Header>
@@ -156,6 +159,34 @@ class CampaignShow extends Component {
                 approversCount={this.props.approversCount}
             />;
         });
+    }
+
+    renderRoadmap() {
+        const data = {
+            lanes: [
+                {
+                    id: 'lane1',
+                    title: 'Planned Tasks',
+                    label: '2/2',
+                    cards: [
+                        {id: 'Card1', title: 'Write Blog', description: 'Can AI make memes', label: '30 mins'},
+                        {id: 'Card2', title: 'Pay Rent', description: 'Transfer via NEFT', label: '5 mins', metadata: {sha: 'be312a1'}}
+                    ]
+                },
+                {
+                    id: 'lane2',
+                    title: 'Completed',
+                    label: '0/0',
+                    cards: []
+                }
+            ]
+        }
+
+        return (
+            <Segment>
+                <Board draggable data={data} />
+            </Segment>
+        );
     }
 
     renderInfo() {

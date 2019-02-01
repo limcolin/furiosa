@@ -17,9 +17,9 @@ module.exports = new Archetype({
         $type: 'string',
         $required: true
     },
-    approved: {
-        $type: 'boolean',
+    status: {
+        $type: 'string',
         $required: true,
-        $default: false
+        $default: 'open'
     }
 }).compile('RequestType');

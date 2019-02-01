@@ -56,6 +56,14 @@ module.exports = db => {
         }
     }));
 
+    //======================================================//
+    //                      Requests                        //
+    //======================================================//
+    // Get Freelancer Requests
+    router.get('/requests', wrapAsync(async function(req, res) {
+        return db.collection('Requests').find({ freelancer: req.query.freelancer }).sort({ _id: 1 }).toArray()
+    }));
+
     // Get campaign Requests
     router.get('/requests/:campaign', wrapAsync(async function(req) {
         return db.collection('Requests').find({ campaign: req.params.campaign }).sort({ _id: 1 }).toArray()
@@ -72,9 +80,27 @@ module.exports = db => {
         }
     }));
 
+    // Update Request
+    router.post('/requests/:id', wrapAsync(async function(req) {
+        let query = { _id: Archetype.to(req.params.id, ObjectId) };
+        try {
+            const { result } = await db.collection('Requests').findOneAndUpdate(
+                query,
+                { $set: req.body }
+            );
+            return { result };
+        } catch (err) {
+            console.log(err);
+        }
+    }));
+
     // Get all Freelancers
     router.get('/freelancers', wrapAsync(async function(req) {
         return db.collection('Freelancers').find().sort({ _id: 1 }).toArray()
+    }));
+
+    router.get('/freelancers/:address', wrapAsync(async function(req) {
+        return db.collection('Freelancers').findOne({ address: req.params.address })
     }));
 
     // Add a new Freelancer

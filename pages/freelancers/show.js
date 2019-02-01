@@ -5,8 +5,9 @@ import { Card, Grid, Button, Container, Segment, Tab, Image, Icon, Label, Table 
 import web3 from '../../ethereum/web3';
 import { Link } from '../../routes';
 import "../../style.css";
-import RequestRow from '../../components/RequestRow';
+import AcceptRow from '../../components/AcceptRow';
 import * as superagent from 'superagent';
+import Campaign from '../../ethereum/campaign';
 
 class FreelancerShow extends Component {
     static async getInitialProps(props) {
@@ -18,8 +19,10 @@ class FreelancerShow extends Component {
             const { db } = props.req;
 
             const freelancer_details = await db.collection('Freelancers').findOne({ address: props.query.address });
+            const requests_details = await db.collection('Requests').find({ freelancer: props.query.address }).sort({ _id: 1 }).toArray();
 
             return {
+                requests_details: requests_details,
                 address: props.query.address,
                 balance: summary[1],
                 manager: summary[2],
@@ -30,8 +33,10 @@ class FreelancerShow extends Component {
         } else {
             // Otherwise, we're rendering on the client and need to use the API
             const freelancer_details = await superagent.get('/api/freelancers/' + props.query.address).then(res => res.body);
+            const requests_details = await superagent.get('/api/requests').query({ 'freelancer': props.query.address }).then(res => res.body);
 
             return {
+                requests_details: requests_details,
                 address: props.query.address,
                 balance: summary[1],
                 manager: summary[2],
@@ -140,7 +145,36 @@ class FreelancerShow extends Component {
     }
     renderHistory() {}
     renderPortfolio() {}
-    renderRequests() {}
+
+    renderRequests() {
+        const { Header, Row, HeaderCell, Body } = Table;
+        return (
+            <>
+                <Table>
+                    <Header>
+                        <Row>
+                            <HeaderCell>Campaign</HeaderCell>
+                            <HeaderCell>Description</HeaderCell>
+                            <HeaderCell>Amount</HeaderCell>
+                            <HeaderCell>Accept</HeaderCell>
+                            <HeaderCell>Reject</HeaderCell>
+                        </Row>
+                    </Header>
+                    <Body>{this.renderRows()}</Body>
+                </Table>
+                <div>Found {this.props.requests_details.length} requests.</div>
+            </>
+        );
+    }
+
+    renderRows() {
+        return this.props.requests_details.map((request_details, index) => {
+            return <AcceptRow key={index}
+                request_details={request_details}
+                address={this.props.address}
+            />;
+        });
+    }
 
     render() {
         return (

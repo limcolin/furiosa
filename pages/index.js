@@ -47,20 +47,22 @@ class CampaignIndex extends Component {
             }
 
             return (
-                <Card key={campaignIndex} href={`/campaigns/${address}`} fluid={true} raised={true}>
-                    <div className="card-image-div"><Image src={'https://gateway.ipfs.io/ipfs/' + this.props.campaignDetails[campaignIndex]['image_hash']} /></div>
-                    <Card.Content>
-                        <Card.Header>{this.props.campaignDetails[campaignIndex]['name']}</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>{moment(date).format('ll')}</span>
-                        </Card.Meta>
-                        <Card.Description>{desc}</Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                        {/*<Progress size='small' indicating percent={(balance/(this.props.campaignDetails[campaignIndex]['target']))*100} progress autoSuccess precision={1} />*/}
-                        <Progress label={'$'+Math.floor(Math.random() * 100) + 20} size='small' percent={Math.floor(Math.random() * 100) + 1} progress precision={1} />
-                    </Card.Content>
-                </Card>
+                <Link key={campaignIndex} prefetch route={`/campaigns/${address}`} href={`/campaigns/${address}`}>
+                    <Card link fluid={true} raised={true}>
+                        <div className="card-image-div"><Image src={'https://gateway.ipfs.io/ipfs/' + this.props.campaignDetails[campaignIndex]['image_hash']} /></div>
+                        <Card.Content>
+                            <Card.Header>{this.props.campaignDetails[campaignIndex]['name']}</Card.Header>
+                            <Card.Meta>
+                                <span className='date'>{moment(date).format('ll')}</span>
+                            </Card.Meta>
+                            <Card.Description>{desc}</Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
+                            {/*<Progress size='small' indicating percent={(balance/(this.props.campaignDetails[campaignIndex]['target']))*100} progress autoSuccess precision={1} />*/}
+                            <Progress label={'$'+Math.floor(Math.random() * 100) + 20} size='small' percent={Math.floor(Math.random() * 100) + 1} progress precision={1} />
+                        </Card.Content>
+                    </Card>
+                </Link>
             );
         });
 

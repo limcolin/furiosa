@@ -95,7 +95,7 @@ class Header extends Component {
             m.init();
         }
 
-        console.clear();
+        //console.clear();
         var messenger = new Messenger($('#messenger'));
     }
 

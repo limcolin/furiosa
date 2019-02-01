@@ -34,20 +34,22 @@ class FreelancerIndex extends Component {
             }
 
             return (
-                <Card key={freelancerIndex} href={`/freelancers/${address}`} fluid={true} raised={true}>
-                    <div className="card-image-div"><Image circular={true} src={'https://gateway.ipfs.io/ipfs/' + this.props.freelancerDetails[freelancerIndex]['image_hash']} /></div>
-                    <Card.Content>
-                        <Card.Header>{this.props.freelancerDetails[freelancerIndex]['name']} <span className='date'>{this.props.freelancerDetails[freelancerIndex]['title']}</span></Card.Header>
-                        <Card.Meta>
-                            <span className='date'>{this.props.freelancerDetails[freelancerIndex]['location']}</span>
-                        </Card.Meta>
-                        <Card.Description>{desc}</Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                        {/*<Progress size='small' indicating percent={(balance/(this.props.campaignDetails[campaignIndex]['target']))*100} progress autoSuccess precision={1} />*/}
-                        <span className='rate'>${this.props.freelancerDetails[freelancerIndex]['rate']}/hr</span>
-                    </Card.Content>
-                </Card>
+                <Link prefetch key={freelancerIndex} href={`/freelancers/${address}`} route={`/freelancers/${address}`} >
+                    <Card link fluid={true} raised={true}>
+                        <div className="card-image-div"><Image circular={true} src={'https://gateway.ipfs.io/ipfs/' + this.props.freelancerDetails[freelancerIndex]['image_hash']} /></div>
+                        <Card.Content>
+                            <Card.Header>{this.props.freelancerDetails[freelancerIndex]['name']} <span className='date'>{this.props.freelancerDetails[freelancerIndex]['title']}</span></Card.Header>
+                            <Card.Meta>
+                                <span className='date'>{this.props.freelancerDetails[freelancerIndex]['location']}</span>
+                            </Card.Meta>
+                            <Card.Description>{desc}</Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
+                            {/*<Progress size='small' indicating percent={(balance/(this.props.campaignDetails[campaignIndex]['target']))*100} progress autoSuccess precision={1} />*/}
+                            <span className='rate'>${this.props.freelancerDetails[freelancerIndex]['rate']}/hr</span>
+                        </Card.Content>
+                    </Card>
+                </Link>
             );
         });
 
