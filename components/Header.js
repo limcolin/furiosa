@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Menu } from 'semantic-ui-react';
 import { Link } from '../routes';
 import $ from 'jquery';
@@ -16,8 +15,8 @@ class Header extends Component {
                 m.current_length = 0;
                 m.fadeBuffer = false;
                 m.messages = [
-                    'Codename:Furiosa',
                     'furiosa.io',
+                    'Codename:Furiosa',
                     'Cool.'
                 ];
 
@@ -105,12 +104,12 @@ class Header extends Component {
             <Menu className='main-menu' pointing secondary>
                 <Menu.Menu>
                     <Menu.Item>
-                        <Link href="/" route="/">
+                        <Link prefetch href="/" route="/">
                             <a className="item">Campaigns</a>
                         </Link>
                     </Menu.Item>
                     <Menu.Item>
-                        <Link href={`/freelancers`} route={`/freelancers`}>
+                        <Link prefetch href={`/freelancers`} route={`/freelancers`}>
                             <a className="item">Freelancers</a>
                         </Link>
                     </Menu.Item>
