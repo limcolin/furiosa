@@ -55,7 +55,7 @@ class FreelancerIndex extends Component {
                     <div className='intro-section full-width'>
                         <Container>
                             <div className='cards-div'>
-                                <h3>Prioritizing People</h3>
+                                <h3>Putting People First</h3>
                                 <p>Our employees are our most important customers, and in order to build comapnies with SOUL, we need to put our people first.</p>
                                 <p>All freelancer profiles are vetted for authenticity to ensure that you get exactly what you paid for.</p>
                                 <p>Real people with real profiles and work history.</p>
