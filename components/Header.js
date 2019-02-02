@@ -109,6 +109,11 @@ class Header extends Component {
                         </Link>
                     </Menu.Item>
                     <Menu.Item>
+                        <Link prefetch href={`/contracts`} route={`/contracts`}>
+                            <a className="item">Contracts</a>
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item>
                         <Link prefetch href={`/freelancers`} route={`/freelancers`}>
                             <a className="item">Freelancers</a>
                         </Link>

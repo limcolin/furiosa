@@ -67,10 +67,11 @@ class FreelancerIndex extends Component {
                     <div className='intro-section full-width'>
                         <Container>
                             <div className='cards-div'>
-                                <h3>Crowdfunding Done Right</h3>
-                                <p>All of our freelancers are handpicked and sourced from only the best-quality organic ingredients from around the world.</p>
+                                <h3>Prioritizing People</h3>
+                                <p>Our employees are our most important customers, and in order to build comapnies with SOUL, we need to put our people first.</p>
+                                <p>All freelancer profiles are vetted for authenticity to ensure that you get exactly what you paid for.</p>
                                 <p>Real people with real profiles and work history.</p>
-                                <p>They say ideas are cheap and that execution is key. Rest assured that your contributions are well spent and only go towards the people working to execute the idea.</p>
+                                <p>They say ideas are cheap and that execution is key - rest assured that your contributions are well spent and only go towards the best people working to execute the idea.</p>
                             </div>
                         </Container>
                     </div>
