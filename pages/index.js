@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import factory from '../ethereum/factory';
-import Campaign from '../ethereum/campaign';
 import { Card, Button, Progress, Image, Reveal, Table, Container, Form } from 'semantic-ui-react';
 import Layout from '../components/Layout';
 import { Link } from '../routes';
@@ -11,47 +9,27 @@ import moment from 'moment';
 
 class CampaignIndex extends Component {
     static async getInitialProps({req}) {
-        const campaigns = await factory.methods.getDeployedCampaigns().call();
+        const campaignDetails = req ? await req.db.collection('Campaigns').find().sort({ _id: 1 }).toArray() : await superagent.get('/api/campaigns').then(res => res.body);
 
-        let campaignSummaries = [];
-
-        for(let i = 0; i < campaigns.length; i++) {
-            let campaign = Campaign(campaigns[i]);
-            let summary = await campaign.methods.getSummary().call();
-            campaignSummaries.push(summary);
-        }
-
-        if (req) {
-            const { db } = req;
-
-            const campaignDetails = await db.collection('Campaigns').find().sort({ _id: 1 }).toArray();
-            //var date = new Date( parseInt( campaignDetails[0]['_id'].toString().substring(0,8), 16 ) * 1000 );
-
-            return { campaigns, campaignDetails, campaignSummaries };
-        } else {
-            // Otherwise, we're rendering on the client and need to use the API
-            const campaignDetails = await superagent.get('/api/campaigns').then(res => res.body);
-
-            return { campaigns, campaignDetails, campaignSummaries };
-        }
+        return { campaignDetails };
     }
 
     renderCampaigns() {
-        const cards = this.props.campaigns.map((address, campaignIndex) => {
-            let balance = web3.utils.fromWei(this.props.campaignSummaries[campaignIndex][2], 'ether');
-            let date = new Date( parseInt( this.props.campaignDetails[campaignIndex]['_id'].toString().substring(0,8), 16 ) * 1000 );
-            let desc = this.props.campaignDetails[campaignIndex]['description'];
+        const cards = this.props.campaignDetails.map((campaign, campaignIndex) => {
+            //let balance = web3.utils.fromWei(this.props.campaignSummaries[campaignIndex][2], 'ether');
+            let date = new Date( parseInt( campaign['_id'].toString().substring(0,8), 16 ) * 1000 );
+            let desc = campaign['description'];
             let limit = 120;
             if(desc.length > limit) {
                 desc = desc.substring(0,limit)+"..";
             }
 
             return (
-                <Link key={campaignIndex} prefetch route={`/campaigns/${address}`} href={`/campaigns/${address}`}>
+                <Link key={campaignIndex} prefetch route={`/campaigns/${campaign.address}`} href={`/campaigns/${campaign.address}`}>
                     <Card link fluid={true} raised={true}>
-                        <div className="card-image-div"><Image src={'https://gateway.ipfs.io/ipfs/' + this.props.campaignDetails[campaignIndex]['image_hash']} /></div>
+                        <div className="card-image-div"><Image src={'https://gateway.ipfs.io/ipfs/' + campaign['image_hash']} /></div>
                         <Card.Content>
-                            <Card.Header>{this.props.campaignDetails[campaignIndex]['name']}</Card.Header>
+                            <Card.Header>{campaign['name']}</Card.Header>
                             <Card.Meta>
                                 <span className='date'>{moment(date).format('ll')}</span>
                             </Card.Meta>

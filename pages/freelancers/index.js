@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import factory from '../../ethereum/factory';
 import { Card, Button, Image, Icon, Container } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
 import { Link } from '../../routes';
@@ -9,44 +8,33 @@ import moment from 'moment';
 
 class FreelancerIndex extends Component {
     static async getInitialProps({req}) {
-        const freelancers = await factory.methods.getFreelancers().call();
+        const freelancerDetails = req ? await req.db.collection('Freelancers').find().sort({ _id: 1 }).toArray() : await superagent.get('/api/freelancers').then(res => res.body);
 
-        if (req) {
-            const { db } = req;
-
-            const freelancerDetails = await db.collection('Freelancers').find().sort({ _id: 1 }).toArray();
-
-            return { freelancers, freelancerDetails };
-        } else {
-            // Otherwise, we're rendering on the client and need to use the API
-            const freelancerDetails = await superagent.get('/api/freelancers').then(res => res.body);
-
-            return { freelancers, freelancerDetails };
-        }
+        return { freelancerDetails };
     }
 
     renderFreelancers() {
-        const cards = this.props.freelancers.map((address, freelancerIndex) => {
-            let desc = this.props.freelancerDetails[freelancerIndex]['summary'];
+        const cards = this.props.freelancerDetails.map((freelancer, freelancerIndex) => {
+            let desc = freelancer['summary'];
             let limit = 120;
             if(desc.length > limit) {
                 desc = desc.substring(0,limit)+"..";
             }
 
             return (
-                <Link prefetch key={freelancerIndex} href={`/freelancers/${address}`} route={`/freelancers/${address}`} >
+                <Link prefetch key={freelancerIndex} href={`/freelancers/${freelancer.address}`} route={`/freelancers/${freelancer.address}`} >
                     <Card link fluid={true} raised={true}>
-                        <div className="card-image-div"><Image circular={true} src={'https://gateway.ipfs.io/ipfs/' + this.props.freelancerDetails[freelancerIndex]['image_hash']} /></div>
+                        <div className="card-image-div"><Image circular={true} src={'https://gateway.ipfs.io/ipfs/' + freelancer['image_hash']} /></div>
                         <Card.Content>
-                            <Card.Header>{this.props.freelancerDetails[freelancerIndex]['name']} <span className='date'>{this.props.freelancerDetails[freelancerIndex]['title']}</span></Card.Header>
+                            <Card.Header>{freelancer['name']} <span className='date'>{freelancer['title']}</span></Card.Header>
                             <Card.Meta>
-                                <span className='date'>{this.props.freelancerDetails[freelancerIndex]['location']}</span>
+                                <span className='date'>{freelancer['location']}</span>
                             </Card.Meta>
                             <Card.Description>{desc}</Card.Description>
                         </Card.Content>
                         <Card.Content extra>
                             {/*<Progress size='small' indicating percent={(balance/(this.props.campaignDetails[campaignIndex]['target']))*100} progress autoSuccess precision={1} />*/}
-                            <span className='rate'>${this.props.freelancerDetails[freelancerIndex]['rate']}/hr</span>
+                            <span className='rate'>${freelancer['rate']}/hr</span>
                         </Card.Content>
                     </Card>
                 </Link>
