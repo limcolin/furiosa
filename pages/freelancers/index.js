@@ -20,11 +20,13 @@ class FreelancerIndex extends Component {
             if(desc.length > limit) {
                 desc = desc.substring(0,limit)+"..";
             }
+            let img_url = freelancer['image_hash'] == 'default' ? '/static/felicia.jpg' : ( freelancer['image_hash'] == 'default2' ? '/static/matthew.png' : 'https://gateway.ipfs.io/ipfs/' + freelancer['image_hash'] );
+            let rate = freelancer['rate'] == 0 ? '15% Equity' : '$' + freelancer['rate'] + '/hr';
 
             return (
                 <Link prefetch key={freelancerIndex} href={`/freelancers/${freelancer.address}`} route={`/freelancers/${freelancer.address}`} >
                     <Card link fluid={true} raised={true}>
-                        <div className="card-image-div"><Image circular={true} src={'https://gateway.ipfs.io/ipfs/' + freelancer['image_hash']} /></div>
+                        <div className="card-image-div"><Image circular={true} src={img_url} /></div>
                         <Card.Content>
                             <Card.Header>{freelancer['name']} <span className='date'>{freelancer['title']}</span></Card.Header>
                             <Card.Meta>
@@ -34,7 +36,7 @@ class FreelancerIndex extends Component {
                         </Card.Content>
                         <Card.Content extra>
                             {/*<Progress size='small' indicating percent={(balance/(this.props.campaignDetails[campaignIndex]['target']))*100} progress autoSuccess precision={1} />*/}
-                            <span className='rate'>${freelancer['rate']}/hr</span>
+                            <span className='rate'>{rate}</span>
                         </Card.Content>
                     </Card>
                 </Link>
@@ -69,10 +71,7 @@ class FreelancerIndex extends Component {
                     </div>
 
                     <div className='cards-div freelancers'>
-                        <Card.Group stackable itemsPerRow='4'>
-                            {this.renderFreelancers()}
-                            {this.renderFreelancers()}
-                            {this.renderFreelancers()}
+                        <Card.Group centered stackable itemsPerRow='4'>
                             {this.renderFreelancers()}
                         </Card.Group>
                     </div>

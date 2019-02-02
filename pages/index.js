@@ -173,12 +173,8 @@ class CampaignIndex extends Component {
                     </div>
 
                     <div className='cards-div campaigns'>
-                        <h4>Latest</h4>
-                        <Card.Group stackable itemsPerRow='4'>
-                            {this.renderCampaigns()}
-                        </Card.Group>
-                        <h4>Trending</h4>
-                        <Card.Group stackable itemsPerRow='4'>
+                        {/*<h4>Latest</h4>*/}
+                        <Card.Group centered stackable itemsPerRow='4'>
                             {this.renderCampaigns()}
                         </Card.Group>
                     </div>
