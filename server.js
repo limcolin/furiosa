@@ -18,7 +18,7 @@ const handler = routes.getRequestHandler(app);
 const server = express();
 
 // connect to database
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGOLAB_WHITE_URI || process.env.MONGODB_URI, { useNewUrlParser: true });
 let db = mongoose.connection;
 
 // checks if connection with the database is successful
@@ -38,7 +38,7 @@ server.get('*', (req, res) => {
 });
 
 app.prepare().then(() => {
-  server.use(handler).listen(process.env.PORT || 3000, (err) => {
+  server.use(handler).listen(process.env.PORT || 8080, (err) => {
       if(err) throw err;
       console.log('Ready on localhost:3000');
   })
