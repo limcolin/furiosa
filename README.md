@@ -5,6 +5,23 @@ Codename: Furiosa
 
 ## Furiosa has moved onward to the next phase - a not-so-rapid prototype - where the components will be separated into individual modules for better separation of concerns which will allow for better quality of code and development process. Sit tight for updates!!
 
+### FuriosaAPI
+- Node
+- ExpressJS
+- MongoDB
+
+### Furiosa App
+- React
+- NextJS
+- Solidity
+- Metamask
+- uPort
+
+### Furiosa Bot
+- GitHub API
+- Probot
+- ExpressJS
+
 1) git clone
 2) npm install
 3) cd ethereum
