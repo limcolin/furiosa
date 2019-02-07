@@ -5,19 +5,25 @@ Codename: Furiosa
 
 ## Furiosa has moved onward to the next phase - a not-so-rapid prototype - where the components will be separated into individual modules for better separation of concerns which will allow for better quality of code and development process. Sit tight for updates!!
 
-### FuriosaAPI
-- Node
-- ExpressJS
-- MongoDB
-
 ### Furiosa App
+Front-end client that acts as central interface to access the Blockchain, IPFS, FuriosaAPI and Furiosa Bot services.
+
 - React
 - NextJS
 - Solidity
 - Metamask
-- uPort
+- IPFS
+
+### FuriosaAPI
+Caching server that maintains an up-to-date copy of all contract and IPFS data on the blockchain, plus storage of trivial (non-payments related) data for easy access.
+
+- Node
+- ExpressJS
+- MongoDB
 
 ### Furiosa Bot
+Github app bot that integrates Furiosa campaigns/freelancers with Github accounts/organizations allowing for direct creation/tracking/approval of contracts through Github milestones/issues.
+
 - GitHub API
 - Probot
 - ExpressJS
