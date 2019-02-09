@@ -1,6 +1,8 @@
 # furiosa
 Codename: Furiosa
 
+## Update New repos are up at https://github.com/codename-furiosa
+
 ## Update 02/19 Alot was learnt from this rapid prototype that took 1 month.
 
 ## Furiosa has moved onward to the next phase - a not-so-rapid prototype - where the components will be separated into individual modules for better separation of concerns which will allow for better quality of code and development process. Sit tight for updates!!
